@@ -12,10 +12,10 @@ def dashboard(request):
         raise ValidationError("/orders/last_month_sales : Could not connect to orders microservices")
 
     resp = resp.json()
-    print(resp)
+    # print(resp)
     context = {
         'last_month_sales': resp
     }
+    print(context)
 
-
-    return render(request, 'dashboard.html')
+    return render(request, 'dashboard.html', context)
