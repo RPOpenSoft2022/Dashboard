@@ -9,6 +9,7 @@ def dashboard(request):
     sales_url = "http://34.93.3.9/orderapp/last_month_sales/"
     add = send_request_get(sales_url)
     [_, sales_response] = send_request_get(sales_url)
+    print(sales_response)
     sales_data = sales_response.json()
     print(sales_data)
     sales_months = list(sales_data.keys())
@@ -59,6 +60,8 @@ def getPodData():
         podList = []
         for i in ret.items:
             podCt = podCt + 1
+            for j in i.spec.containers:
+                j.image = j.image.replace("rp", "")
             podList.append({
                 "pod_ip": i.status.pod_ip, 
                 "name": i.metadata.name,
